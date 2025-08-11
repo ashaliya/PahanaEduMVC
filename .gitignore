@@ -1,0 +1,16 @@
+# Build and output folders
+/build/
+/dist/
+/out/
+/target/
+
+# NetBeans private settings
+/nbproject/private/
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+

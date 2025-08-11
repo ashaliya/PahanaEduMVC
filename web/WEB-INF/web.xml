@@ -1,0 +1,129 @@
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+                             https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0">
+
+  <!-- Servlets -->
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>controller.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/LoginServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>CustomerListServlet</servlet-name>
+    <servlet-class>controller.CustomerListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CustomerListServlet</servlet-name>
+    <url-pattern>/customers/list</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>AddCustomerServlet</servlet-name>
+    <servlet-class>controller.AddCustomerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddCustomerServlet</servlet-name>
+    <url-pattern>/AddCustomerServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>EditCustomerServlet</servlet-name>
+    <servlet-class>controller.EditCustomerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditCustomerServlet</servlet-name>
+    <url-pattern>/customers/edit</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>DeleteCustomerServlet</servlet-name>
+    <servlet-class>controller.DeleteCustomerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteCustomerServlet</servlet-name>
+    <url-pattern>/customers/delete</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ItemListServlet</servlet-name>
+    <servlet-class>controller.ItemListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ItemListServlet</servlet-name>
+    <url-pattern>/items/list</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>AddItemServlet</servlet-name>
+    <servlet-class>controller.AddItemServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddItemServlet</servlet-name>
+    <url-pattern>/AddItemServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>EditItemServlet</servlet-name>
+    <servlet-class>controller.EditItemServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditItemServlet</servlet-name>
+    <url-pattern>/items/edit</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>DeleteItemServlet</servlet-name>
+    <servlet-class>controller.DeleteItemServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteItemServlet</servlet-name>
+    <url-pattern>/items/delete</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>CreateReceiptServlet</servlet-name>
+    <servlet-class>controller.CreateReceiptServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateReceiptServlet</servlet-name>
+    <url-pattern>/cashier/create</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>BillHistoryServlet</servlet-name>
+    <servlet-class>controller.BillHistoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BillHistoryServlet</servlet-name>
+    <url-pattern>/cashier/history</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ReceiptServlet</servlet-name>
+    <servlet-class>controller.ReceiptServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReceiptServlet</servlet-name>
+    <url-pattern>/cashier/receipt</url-pattern>
+  </servlet-mapping>
+
+  <!-- Filter -->
+  <filter>
+    <filter-name>AuthFilter</filter-name>
+    <filter-class>controller.AuthFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AuthFilter</filter-name>
+    <url-pattern>/jsp/*</url-pattern>
+  </filter-mapping>
+
+  <welcome-file-list>
+    <welcome-file>jsp/shared/login.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
