@@ -53,18 +53,20 @@ public class AuthFilter implements Filter {
 
         //  Role-based authorization for JSP areas
         String role = user.getRole();
-        if (path.startsWith("/jsp/admin/") && !"Admin".equals(role)) {
+        if (path.startsWith("/admin/") && !"Admin".equals(user.getRole())) {
             resp.sendError(HttpServletResponse.SC_FORBIDDEN);
             return;
         }
+
         if (path.startsWith("/jsp/stock/") && !"StockKeeper".equals(role)) {
             resp.sendError(HttpServletResponse.SC_FORBIDDEN);
             return;
         }
-        if (path.startsWith("/jsp/cashier/") && !"Cashier".equals(role)) {
+        if (path.startsWith("/cashier/") && !"Cashier".equals(user.getRole())) {
             resp.sendError(HttpServletResponse.SC_FORBIDDEN);
             return;
-        }
+}
+
 
         //  OK, proceed
         chain.doFilter(request, response);
