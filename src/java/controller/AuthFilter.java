@@ -6,7 +6,6 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.WebFilter;
 import java.io.IOException;
 
-
 @WebFilter("/*")
 public class AuthFilter implements Filter {
 
@@ -24,26 +23,27 @@ public class AuthFilter implements Filter {
 
         // Normalize path (strip context path)
         String ctx  = req.getContextPath();
-        String path = req.getRequestURI().substring(ctx.length());
+        String path = req.getRequestURI().substring(ctx.length()); // e.g. "/admin/users"
 
-        //  Allow public pages and static assets (update if you add /js or /resources)
+        // -------- Public allowlist (no session required) --------
         boolean publicPath =
                 path.equals("/") ||
                 path.equals("/index.html") ||
                 path.equals("/jsp/shared/login.jsp") ||
-                path.equals("/LoginServlet") ||
+                path.equals("/LoginServlet") ||   // login handler
+                path.equals("/logout") ||         // logout servlet
                 path.startsWith("/css/") ||
                 path.startsWith("/img/") ||
+                path.startsWith("/js/") ||
                 path.startsWith("/favicon") ||
-
-                false;
+                path.startsWith("/resources/");
 
         if (publicPath) {
             chain.doFilter(request, response);
             return;
         }
 
-        //  Require login for everything else
+        // -------- Require login for everything else --------
         HttpSession session = req.getSession(false);
         User user = (session == null) ? null : (User) session.getAttribute("user");
         if (user == null) {
@@ -51,25 +51,71 @@ public class AuthFilter implements Filter {
             return;
         }
 
-        //  Role-based authorization for JSP areas
-        String role = user.getRole();
-        if (path.startsWith("/admin/") && !"Admin".equals(user.getRole())) {
-            resp.sendError(HttpServletResponse.SC_FORBIDDEN);
+        String role = user.getRole(); // "Admin", "Cashier", "StockKeeper"
+
+        // -------- Admin can access everything --------
+        if ("Admin".equals(role)) {
+            chain.doFilter(request, response);
             return;
         }
 
-        if (path.startsWith("/jsp/stock/") && !"StockKeeper".equals(role)) {
-            resp.sendError(HttpServletResponse.SC_FORBIDDEN);
+        // -------- Area detection (for non-admin roles) --------
+        boolean isAdminArea =
+                path.startsWith("/admin/") || path.startsWith("/jsp/admin/");
+
+        boolean isCashierArea =
+                path.startsWith("/cashier/") || path.startsWith("/jsp/cashier/");
+
+        boolean isStockArea =
+                path.startsWith("/stock/") || path.startsWith("/jsp/stock/");
+
+        // Customers — split into list/view (shared) vs create/edit (admin-only)
+        boolean isCustomersListOrView =
+                path.equals("/customers") ||
+                path.startsWith("/customers/view") ||
+                path.startsWith("/jsp/customers/list") ||
+                path.startsWith("/jsp/customers/view");
+
+        boolean isCustomersCreateOrEdit =
+                path.startsWith("/customers/create") ||
+                path.startsWith("/customers/edit") ||
+                path.startsWith("/jsp/customers/form");
+
+        // -------- Enforce rules for non-admins --------
+        // Cashier:
+        if ("Cashier".equals(role)) {
+            // deny admin pages
+            if (isAdminArea) { resp.sendError(HttpServletResponse.SC_FORBIDDEN); return; }
+            // allow cashier pages
+            if (isCashierArea) { chain.doFilter(request, response); return; }
+            // allow customers list/view
+            if (isCustomersListOrView) { chain.doFilter(request, response); return; }
+            // deny customers create/edit
+            if (isCustomersCreateOrEdit) { resp.sendError(HttpServletResponse.SC_FORBIDDEN); return; }
+            // deny stock pages
+            if (isStockArea) { resp.sendError(HttpServletResponse.SC_FORBIDDEN); return; }
+            // everything else: allow (or tighten later if needed)
+            chain.doFilter(request, response);
             return;
         }
-        if (path.startsWith("/cashier/") && !"Cashier".equals(user.getRole())) {
-            resp.sendError(HttpServletResponse.SC_FORBIDDEN);
+
+        // StockKeeper:
+        if ("StockKeeper".equals(role)) {
+            // allow stock pages
+            if (isStockArea) { chain.doFilter(request, response); return; }
+            // deny admin & cashier pages
+            if (isAdminArea || isCashierArea) { resp.sendError(HttpServletResponse.SC_FORBIDDEN); return; }
+            // deny all customers pages (both list/view and create/edit)
+            if (isCustomersListOrView || isCustomersCreateOrEdit) {
+                resp.sendError(HttpServletResponse.SC_FORBIDDEN); return;
+            }
+            // everything else: allow (or tighten later if needed)
+            chain.doFilter(request, response);
             return;
-}
+        }
 
-
-        //  OK, proceed
-        chain.doFilter(request, response);
+        // Unknown role — safest to block
+        resp.sendError(HttpServletResponse.SC_FORBIDDEN);
     }
 
     @Override
