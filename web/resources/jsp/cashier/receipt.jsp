@@ -20,7 +20,7 @@
   <p class="text-muted">Date: <%=bill.getCreatedAt()%></p>
 
   <table class="table table-bordered align-middle">
-    <thead><tr><th>Item</th><th class="text-end">Qty</th><th class="text-end">Price</th><th class="text-end">Total</th></tr></thead>
+    <thead><tr><th>Account Number</th><th>Item</th><th class="text-end">Qty</th><th class="text-end">Price</th><th class="text-end">Total</th></tr></thead>
     <tbody>
     <%
       for (BillItem li : bill.getItems()) {
