@@ -17,9 +17,10 @@
 
   <form method="post" action="<%=ctx%>/cashier/create-receipt">
     <table class="table align-middle" id="lines">
-      <thead><tr><th style="width:35%">Item ID</th><th style="width:25%">Qty</th><th>Action</th></tr></thead>
+      <thead><tr><th style="width:25%">Account Number</th><th style="width:25%">Item ID</th><th style="width:25%">Qty</th><th>Action</th></tr></thead>
       <tbody>
         <tr>
+          <td><input class="form-control" name="Account Number" placeholder="e.g. 1001" required></td>
           <td><input class="form-control" name="itemId" placeholder="e.g. 1" required></td>
           <td><input class="form-control" name="qty" type="number" min="1" value="1" required></td>
           <td><button type="button" class="btn btn-sm btn-outline-danger" onclick="removeRow(this)">Remove</button></td>
