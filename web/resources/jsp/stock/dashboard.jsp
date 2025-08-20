@@ -38,11 +38,12 @@
 <nav class="navbar navbar-expand-lg navbar-dark" style="background:linear-gradient(90deg,#5b7fff,#7bdcff)">
   <div class="container">
     <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
-      <img src="<%=ctx%>/img/logo.png" height="28" class="me-2" alt="logo"> Stock Keeper
+      <img src="<%=ctx%>/img/logo.jpg" height="28" class="me-2" alt="logo"> Stock Keeper
     </a>
-    <a class="btn btn-light btn-sm ms-auto" href="<%=ctx%>/logout.jsp">
-      <i class="bi bi-box-arrow-right me-1"></i> Logout
-    </a>
+    <a class="btn btn-light btn-sm ms-auto" href="<%=ctx%>/logout">
+  <i class="bi bi-box-arrow-right me-1"></i> Logout
+</a>
+
   </div>
 </nav>
 
