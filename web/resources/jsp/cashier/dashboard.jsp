@@ -33,9 +33,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark" style="background:linear-gradient(90deg,#5b7fff,#7bdcff)">
   <div class="container">
     <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
-      <img src="<%=ctx%>/img/logo.png" height="28" class="me-2" alt="logo"> Cashier
+      <img src="<%=ctx%>/img/logo.jpg" height="28" class="me-2" alt="logo"> Cashier
     </a>
-    <a class="btn btn-light btn-sm ms-auto" href="<%=ctx%>/logout.jsp">
+    <a class="btn btn-light btn-sm ms-auto" href="<%=ctx%>/logout">
       <i class="bi bi-box-arrow-right me-1"></i> Logout
     </a>
   </div>
@@ -68,6 +68,18 @@
             <div class="ms-3">
               <h5 class="mb-1">Bill History</h5>
               <p class="text-muted mb-0 small">See recent bills and totals</p>
+            </div>
+          </div>
+        </a>
+      </div>
+      <!-- ✅ New: Manage Customers -->
+      <div class="col-md-5 col-lg-4">
+        <a class="card action-card shadow-sm" href="<%=ctx%>/customers">
+          <div class="card-body d-flex align-items-center">
+            <i class="bi bi-person-lines-fill action-icon text-info"></i>
+            <div class="ms-3">
+              <h5 class="mb-1">View Customers</h5>
+              <p class="text-muted mb-0 small">View customer details</p>
             </div>
           </div>
         </a>
