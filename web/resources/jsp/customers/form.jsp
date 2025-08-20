@@ -48,17 +48,21 @@
       <textarea class="form-control" name="address" rows="2"><%= edit ? customer.getAddress() : "" %></textarea>
     </div>
 
-    <div class="mb-3">
+   <div class="mb-3">
   <label class="form-label">Phone</label>
-  <input class="form-control"
+  <input type="text"
+         class="form-control"
          name="phone"
-         pattern="^[0-9]"
-         title="Please enter only numbers (0 to 9 digits)"
+         pattern="^0[0-9]{9}"
+         title="Enter a valid 10-digit phone number starting with 0"
          required
-         value="<%= (edit && customer != null) ? customer.getPhone() : "" %>"
-
-  <div class="form-text">Only digits allowed (no +, -, or spaces)</div>
+         value="<
+  <div class="form-text text-danger">Enter a 10-digit number starting with 0 (e.g., 0771234567)</div>
 </div>
+
+
+
+
 
      
     <div class="mb-3">
