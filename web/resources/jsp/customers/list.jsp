@@ -44,7 +44,7 @@
     <table class="table table-hover align-middle">
       <thead>
         <tr>
-          <th>Account #</th><th>Name</th><th>Phone</th><th>Email</th><th>Actions</th>
+            <th>Account #</th><th>Name</th><th>Phone</th><th>Address</th><th>Email</th><th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -54,6 +54,7 @@
           <td><%= c.getAccountNumber() %></td>
           <td><%= c.getName() %></td>
           <td><%= c.getPhone() %></td>
+          <td><%= c.getAddress() %></td>
           <td><%= (c.getEmail()==null || c.getEmail().isBlank()) ? "—" : c.getEmail() %></td>
           <td>
             <!-- View: allowed for Admin and Cashier -->
