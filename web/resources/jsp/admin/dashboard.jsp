@@ -37,9 +37,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark" style="background:linear-gradient(90deg,#5b7fff,#7bdcff)">
   <div class="container">
     <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
-      <img src="<%=ctx%>/img/logo.png" height="28" class="me-2" alt="logo"> Admin
+      <img src="<%=ctx%>/img/logo.jpg" height="28" class="me-2" alt="logo"> Admin
     </a>
-    <a class="btn btn-light btn-sm ms-auto" href="<%=ctx%>/logout.jsp">
+    <a class="btn btn-light btn-sm ms-auto" href="<%=ctx%>/logout">
       <i class="bi bi-box-arrow-right me-1"></i> Logout
     </a>
   </div>
@@ -88,6 +88,18 @@
           </div>
         </a>
       </div>
+      <!-- ✅ New: Manage Customers (links to /customers) -->
+      <div class="col-md-4 col-lg-3">
+        <a class="card action-card shadow-sm" href="<%=ctx%>/customers">
+          <div class="card-body d-flex align-items-center">
+            <i class="bi bi-person-lines-fill action-icon text-info"></i>
+            <div class="ms-3">
+              <h5 class="mb-1">Manage Customers</h5>
+              <p class="text-muted mb-0 small">Add, edit & view accounts</p>
+            </div>
+          </div>
+        </a>
+      </div>
     </div>
 
     <!-- Second row: compact KPIs -->
@@ -97,9 +109,9 @@
           <div class="card-body d-flex align-items-center">
             <div class="kpi-icon bg-primary-subtle text-primary"><i class="bi bi-people"></i></div>
             <div class="ms-3">
-              <h6 class="text-muted mb-0">Customers</h6>
+              <h6 class="text-muted mb-0">Customers Report</h6>
               <div class="h4 mb-1"><%= request.getAttribute("customerCount")==null?"-":request.getAttribute("customerCount") %></div>
-              <a class="small text-decoration-none" href="<%=ctx%>/customers/list">Open customer list →</a>
+              <a class="small text-decoration-none" href="<%=ctx%>/customers">Open customer list →</a>
             </div>
           </div>
         </div>
@@ -112,7 +124,7 @@
             <div class="ms-3">
               <h6 class="text-muted mb-0">Items in stock</h6>
               <div class="h4 mb-1"><%= request.getAttribute("itemCount")==null?"-":request.getAttribute("itemCount") %></div>
-              <a class="small text-decoration-none" href="<%=ctx%>/items/list">Manage items →</a>
+              <a class="small text-decoration-none" href="<%=ctx%>/stock/items">Manage items →</a>
             </div>
           </div>
         </div>
