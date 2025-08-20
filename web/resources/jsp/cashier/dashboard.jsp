@@ -67,7 +67,7 @@
             <i class="bi bi-clock-history action-icon text-primary"></i>
             <div class="ms-3">
               <h5 class="mb-1">Bill History</h5>
-              <p class="text-muted mb-0 small">See recent bills and totals</p>
+              <p class="text-muted mb-0 small">See recent bills and totals (View Only)</p>
             </div>
           </div>
         </a>
