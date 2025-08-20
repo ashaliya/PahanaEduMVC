@@ -64,6 +64,7 @@
               <a class="btn btn-sm btn-outline-secondary"
                  href="<%=ctx%>/customers/edit?account=<%=c.getAccountNumber()%>">Edit</a>
             <% } %>
+            
           </td>
         </tr>
       <% } } else { %>
